@@ -1,0 +1,54 @@
+
+.app
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formSearch
+{
+    background-color: rgb(0, 196, 255);
+    display: flex;
+    flex-direction: row;
+    padding: 3px;
+    border-radius: 12px 10px 10px 12px;
+}
+
+.input__box
+{
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px 10px 10px 12px;
+    display: block;
+}
+
+.input__control
+{
+    height: 42px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 12px 10px 10px 12px !important;
+}
+
+.input__control:focus
+{
+    outline: 0;
+    outline-offset: 0;
+}
+
+.input__submit
+{
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.input__submit:hover
+{
+    background-color: #08baf3;
+    border: 1px solid #08baf3;
+    border-radius: 0 10px 10px 0;
+    transition: background .1s linear;
+}
