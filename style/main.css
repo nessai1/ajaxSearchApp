@@ -1,9 +1,13 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .app
 {
+    font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .formSearch
@@ -24,6 +28,8 @@
 
 .input__control
 {
+    min-width: 300px;
+    max-width: 720px;
     height: 42px;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 12px 10px 10px 12px !important;
@@ -52,3 +58,40 @@
     border-radius: 0 10px 10px 0;
     transition: background .1s linear;
 }
+
+.searchResult
+{
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-direction: column;
+}
+
+.searchResult__item
+{
+    margin-top: 10px;
+    padding: 10px;
+    width: 360px;
+    border-radius: 6px;
+    background-color: rgb(241, 250, 255);
+    display: flex;
+    flex-direction: column;
+    transition: .1s linear;
+}
+
+.searchResult__item:hover
+{
+    background-color: rgb(238, 241, 248);
+    transition: .1s linear;
+}
+
+.searchResult__item__title
+{
+    font-weight: bold;
+}
+
+.searchResult__item__desc
+{
+    font-weight: 400;
+}
+
