@@ -23,6 +23,28 @@ function createSearchItem(searchData)
     return searchItem;
 }
 
+let searchLine = '';
+
+searchField = document.getElementById('searchField');
+
+searchField.onkeydown = searchField.onkeyup = searchField.onkeypress = searchHandler;
+
+function searchHandler(e)
+{
+    let newSearchField = searchField.value;
+    if (searchLine !== newSearchField)
+    {
+        searchLine = newSearchField;
+        getSearchResult(searchLine);
+    }
+}
+
+function getSearchResult(requestValue)
+{
+    console.log(`....getting request with search: ${requestValue}`);
+}
+
+
 let searchList = document.getElementById('searchList');
 
 searchList.append(createSearchItem({title: "Good job", desc: "We have some good news"}));
