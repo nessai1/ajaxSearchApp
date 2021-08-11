@@ -96,3 +96,15 @@
     font-weight: 400;
 }
 
+.notFoundBlock
+{
+    background-color: rgb(241, 250, 255);
+    color: #051b24;
+    width: 360px;
+    height: 150px;
+    font-size: 20px;
+    border-radius: 15px;
+    text-align: center;
+    display: table;
+}
+

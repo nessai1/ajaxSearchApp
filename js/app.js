@@ -24,9 +24,9 @@ function createSearchItem(searchData)
 }
 
 let searchLine = '';
+let searchUrl = 'https://jsonplaceholder.typicode.com'
 
 searchField = document.getElementById('searchField');
-
 searchField.onkeydown = searchField.onkeyup = searchField.onkeypress = searchHandler;
 
 function searchHandler(e)
@@ -39,9 +39,32 @@ function searchHandler(e)
     }
 }
 
-function getSearchResult(requestValue)
+// searchList.remove();
+
+function clearSearchList()
 {
-    console.log(`....getting request with search: ${requestValue}`);
+    for (let i = searchList.childNodes.length-1; i >= 0; i--)
+    {
+        console.log("removing child....", searchList.lastElementChild);
+        searchList.removeChild(searchList.lastElementChild);
+    }
+}
+
+async function getSearchResult(requestValue)
+{
+    if (requestValue === '')
+    {
+
+    }
+    else
+    {
+        searchList.append(createSearchItem({title: "Good job", desc: "We have some good news"}));
+        searchList.append(createSearchItem({title: "Hello world :))", desc: "We have some good news"}));
+    }
+    let searchCommentsUrl = searchUrl + '/' + requestValue + '/comments';
+    let response = await fetch(searchCommentsUrl);
+    let commits = await response.json();
+    console.log(commits);
 }
 
 
