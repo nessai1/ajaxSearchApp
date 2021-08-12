@@ -93,6 +93,7 @@
 
 .searchResult__item__desc
 {
+    margin-top: 20px;
     font-weight: 400;
 }
 
@@ -107,4 +108,11 @@
     text-align: center;
     display: table;
 }
+
+.notFoundBlock__text
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
 
