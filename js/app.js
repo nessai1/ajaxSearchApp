@@ -1,4 +1,28 @@
 
+class App
+{
+    constructor(requestURL)
+    {
+        this.requester = new DataRequester(requestURL);
+        this.searchBlock = new SearchEntity();
+    }
+}
+
+class SearchEntity
+{
+    constructor()
+    {
+    }
+}
+
+class DataRequester
+{
+    constructor(requestURL)
+    {
+        this.requestURL = requestURL;
+    }
+}
+
 function createTextBlock(tagName, text)
 {
     let textBlock = document.createElement(tagName);
