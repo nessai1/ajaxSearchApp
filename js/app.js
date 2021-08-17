@@ -1,17 +1,67 @@
 
 class App
 {
-    constructor(requestURL)
+    constructor(appId, requestURL)
     {
         this.requester = new DataRequester(requestURL);
         this.searchBlock = new SearchEntity();
+
+        this.appNode = document.createElement('div');
+        this.appNode.id = appId;
+        document.body.append(this.appNode);
+        this.appNode.textContent = 'HELLO WORLD';
+        console.log();
     }
 }
 
-class SearchEntity
+
+
+class SearchEntity extends Entity
 {
+    getSearchNode()
+    {
+
+    }
+
     constructor()
     {
+        super();
+        this.searchNode = document.createElement('form');
+        this.searchNode.className = 'formSearch';
+
+        let inputBox = document.createElement('div');
+        inputBox.className = 'input__box';
+
+        let inputControl = document.createElement('input');
+        inputControl.className = 'input__control';
+        inputBox.appendChild(inputControl);
+        //this.searchNode.
+    }
+}
+
+class Entity
+{
+    createElement(typeName, classArray)
+    {
+        let createdElement = document.createElement(typeName);
+        createdElement.className = '';
+
+        if (typeof classArray === 'string')
+        {
+            createdElement.className = classArray;
+        }
+        else if (typeof classArray === 'object')
+        {
+            for (let i = 0; i < classArray.length; i++)
+            {
+                createdElement.className += classArray[i];
+            }
+        }
+
+        return createdElement;
+    }
+
+    constructor() {
     }
 }
 
@@ -174,4 +224,4 @@ async function getSearchResult(requestValue)
 }
 
 
-
+let app = new App('searchApp', 'https://jsonplaceholder.typicode.com');
