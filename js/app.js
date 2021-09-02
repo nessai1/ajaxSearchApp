@@ -1,10 +1,12 @@
 
 class App
 {
+
+
     constructor(appId, requestURL)
     {
         this.requester = new DataRequester(requestURL);
-        this.searchBlock = new SearchForm(this.makeSearchRequest.bind(this));
+        this.searchBlock = new SearchForm(this.handleSearchRequest.bind(this));
         this.resultBlock = new ResultList();
 
         this.appNode = document.createElement('div');
@@ -15,12 +17,34 @@ class App
         this.appNode.appendChild(this.resultBlock.getResultList());
 
         document.body.append(this.appNode);
+        this.isWaiting = true;
+        this.requestLine = '';
+    }
+
+    handleSearchRequest(requestLine)
+    {
+        if (!this.isWaiting)
+        {
+            return;
+        }
+
+        this.isWaiting = false;
+        setTimeout(() => {this.isWaiting = true; this.makeSearchRequest(this.searchBlock.getSearchLine());}, 1000);
+        this.makeSearchRequest(requestLine)
     }
 
     makeSearchRequest(requestLine)
     {
+        if (this.requestLine === requestLine)
+        {
+            return;
+        }
+
         console.log(`do some with '${requestLine}'`);
+        this.requestLine = requestLine;
     }
+
+
 }
 
 
@@ -71,6 +95,11 @@ class SearchForm extends Entity
         let inputBox = this.createElement('div', 'input__box');
         inputBox.appendChild(this.inputControl);
         this.searchForm.appendChild(inputBox);
+    }
+
+    getSearchLine()
+    {
+        return this.inputControl.value;
     }
 
     getSearchForm()
@@ -124,6 +153,8 @@ class DataRequester
     {
         this.requestURL = requestURL;
     }
+
+
 }
 //
 // function createTextBlock(tagName, text)
