@@ -4,22 +4,32 @@ class App
     constructor(appId, requestURL)
     {
         this.requester = new DataRequester(requestURL);
-        this.searchBlock = new SearchEntity();
+        this.searchBlock = new SearchForm(this.makeSearchRequest.bind(this));
+        this.resultBlock = new ResultList();
 
         this.appNode = document.createElement('div');
         this.appNode.id = appId;
         this.appNode.className = 'app';
-        this.appNode.appendChild(this.searchBlock.getSearchNode());
+
+        this.appNode.appendChild(this.searchBlock.getSearchForm());
+        this.appNode.appendChild(this.resultBlock.getResultList());
 
         document.body.append(this.appNode);
     }
 
-
+    makeSearchRequest(requestLine)
+    {
+        console.log(`do some with '${requestLine}'`);
+    }
 }
 
 
 class Entity
 {
+    constructor()
+    {
+    }
+
     createElement(typeName, classArray)
     {
         let createdElement = document.createElement(typeName);
@@ -44,27 +54,66 @@ class Entity
 
         return createdElement;
     }
+}
 
-    constructor() {
+class SearchForm extends Entity
+{
+    constructor(handler)
+    {
+        super();
+        this.searchForm = this.createElement('form', 'formSearch');
+
+        this.inputControl = this.createElement('input', 'input__control');
+        this.inputControl.oninput = function ()  {
+            handler(this.value);
+        }.bind(this.inputControl);
+
+        let inputBox = this.createElement('div', 'input__box');
+        inputBox.appendChild(this.inputControl);
+        this.searchForm.appendChild(inputBox);
+    }
+
+    getSearchForm()
+    {
+        return this.searchForm;
     }
 }
 
-class SearchEntity extends Entity
+class ResultList extends Entity
 {
-    getSearchNode()
-    {
-        return this.searchNode;
-    }
-
     constructor()
     {
         super();
-        this.searchNode = this.createElement('form', 'formSearch');
-        let inputBox = this.createElement('div', 'input__box');
-        let inputControl = this.createElement('input', 'input__control');
+        this.resultList = this.createElement('div', 'searchResult');
+    }
 
-        inputBox.appendChild(inputControl);
-        this.searchNode.appendChild(inputBox);
+    getResultList()
+    {
+        return this.resultList;
+    }
+
+
+}
+
+class ResultCard extends Entity
+{
+    constructor(title, description) {
+        super();
+        this.resultCard = this.createElement('div', 'searchResult__item');
+
+        let titleItem = this.createElement('span', 'searchResult__item__title');
+        titleItem.innerText = title;
+
+        let descriptionItem = this.createElement('span', 'searchResult__item__desc')
+        descriptionItem.innerText = description;
+
+        this.resultCard.appendChild(titleItem);
+        this.resultCard.appendChild(descriptionItem);
+    }
+
+    getResultCard()
+    {
+        return this.resultCard;
     }
 }
 
